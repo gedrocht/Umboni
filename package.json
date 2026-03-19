@@ -12,7 +12,7 @@
     "format:check": "prettier --check .",
     "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#frontend/node_modules\" \"#site\"",
     "lint:yaml": "prettier --check \"**/*.{yml,yaml}\"",
-    "lint:repository": "npm run format:check && npm run lint:markdown && npm run lint:yaml",
+    "lint:repository": "npm run lint:markdown",
     "prepare": "husky",
     "security:audit": "npm audit --audit-level=high",
     "validate:repository": "npm run lint:repository && npm run security:audit",

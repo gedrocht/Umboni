@@ -18,8 +18,27 @@ describe('TemperatureTrendComponent', () => {
 
     const renderedElement = fixture.nativeElement as HTMLElement;
     const renderedPolyline = renderedElement.querySelector('polyline');
+    const renderedCaption = renderedElement.querySelector('figcaption');
 
     expect(renderedPolyline).not.toBeNull();
     expect(renderedPolyline?.getAttribute('points') ?? '').toContain(',');
+    expect(renderedCaption?.textContent ?? '').toContain('10.4');
+    expect(renderedCaption?.textContent ?? '').toContain('12.8');
+  });
+
+  it('renders a flat fallback line when no hourly forecasts are provided', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [TemperatureTrendComponent]
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TemperatureTrendComponent);
+    fixture.detectChanges();
+
+    const renderedElement = fixture.nativeElement as HTMLElement;
+    const renderedPolyline = renderedElement.querySelector('polyline');
+    const renderedCaption = renderedElement.querySelector('figcaption');
+
+    expect(renderedPolyline?.getAttribute('points')).toBe('0,50 240,50');
+    expect(renderedCaption?.textContent ?? '').toContain('0.0');
   });
 });

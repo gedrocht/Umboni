@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import type { HourlyForecast } from '../models/regional-forecast';
 
@@ -62,52 +62,51 @@ import type { HourlyForecast } from '../models/regional-forecast';
   ]
 })
 export class TemperatureTrendComponent {
-  readonly hourlyForecasts = input<readonly HourlyForecast[]>([]);
+  @Input() hourlyForecasts: readonly HourlyForecast[] = [];
 
   /**
    * Computes SVG points by scaling forecast temperatures into a compact sparkline.
    */
-  protected readonly polylinePoints = computed(() => {
-    const hourlyForecasts = this.hourlyForecasts();
-    if (hourlyForecasts.length === 0) {
+  protected polylinePoints(): string {
+    if (this.hourlyForecasts.length === 0) {
       return '0,50 240,50';
     }
 
-    const temperatureValues = hourlyForecasts.map(
+    const temperatureValues = this.hourlyForecasts.map(
       (hourlyForecast) => hourlyForecast.ensembleAirTemperatureCelsius
     );
     const minimumTemperatureCelsius = Math.min(...temperatureValues);
     const maximumTemperatureCelsius = Math.max(...temperatureValues);
     const temperatureRange = Math.max(maximumTemperatureCelsius - minimumTemperatureCelsius, 1);
 
-    return hourlyForecasts
+    return this.hourlyForecasts
       .map((hourlyForecast, currentIndex) => {
-        const xCoordinate = (240 / Math.max(hourlyForecasts.length - 1, 1)) * currentIndex;
+        const xCoordinate = (240 / Math.max(this.hourlyForecasts.length - 1, 1)) * currentIndex;
         const normalizedTemperature =
           (hourlyForecast.ensembleAirTemperatureCelsius - minimumTemperatureCelsius) / temperatureRange;
         const yCoordinate = 88 - normalizedTemperature * 76;
         return `${xCoordinate},${yCoordinate}`;
       })
       .join(' ');
-  });
+  }
 
-  protected readonly minimumTemperatureCelsius = computed(() =>
-    this.hourlyForecasts().length === 0
+  protected minimumTemperatureCelsius(): number {
+    return this.hourlyForecasts.length === 0
       ? 0
       : Math.min(
-          ...this.hourlyForecasts().map(
+          ...this.hourlyForecasts.map(
             (hourlyForecast) => hourlyForecast.ensembleAirTemperatureCelsius
           )
-        )
-  );
+        );
+  }
 
-  protected readonly maximumTemperatureCelsius = computed(() =>
-    this.hourlyForecasts().length === 0
+  protected maximumTemperatureCelsius(): number {
+    return this.hourlyForecasts.length === 0
       ? 0
       : Math.max(
-          ...this.hourlyForecasts().map(
+          ...this.hourlyForecasts.map(
             (hourlyForecast) => hourlyForecast.ensembleAirTemperatureCelsius
           )
-        )
-  );
+        );
+  }
 }
