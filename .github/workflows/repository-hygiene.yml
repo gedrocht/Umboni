@@ -23,7 +23,7 @@ jobs:
           node-version: 22
 
       - name: Install repository tooling
-        run: npm install
+        run: npm ci
 
       - name: Run repository validation
         run: npm run validate:repository
