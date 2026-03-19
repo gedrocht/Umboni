@@ -62,7 +62,7 @@ import type { HourlyForecast } from '../models/regional-forecast';
   ]
 })
 export class TemperatureTrendComponent {
-  readonly hourlyForecasts = input.required<readonly HourlyForecast[]>();
+  readonly hourlyForecasts = input<readonly HourlyForecast[]>([]);
 
   /**
    * Computes SVG points by scaling forecast temperatures into a compact sparkline.

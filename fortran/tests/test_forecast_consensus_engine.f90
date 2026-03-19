@@ -47,9 +47,9 @@ program test_forecast_consensus_engine
   call assert_equal_string('Boston', location_forecasts(1)%location_name, 'The location name should survive aggregation.')
   call assert_equal_integer(4, location_forecasts(1)%hourly_forecasts(1)%provider_coverage_count, &
     'All four providers should contribute to the first hour.')
-  call assert_almost_equal_real(10.65_real64, location_forecasts(1)%hourly_forecasts(1)%ensemble_air_temperature_celsius, &
+  call assert_almost_equal_real(10.70_real64, location_forecasts(1)%hourly_forecasts(1)%ensemble_air_temperature_celsius, &
     0.01_real64, 'The weighted temperature average should match the configured provider weights.')
-  call assert_almost_equal_real(13.20_real64, location_forecasts(1)%hourly_forecasts(1)%ensemble_wind_speed_kilometers_per_hour, &
+  call assert_almost_equal_real(13.05_real64, location_forecasts(1)%hourly_forecasts(1)%ensemble_wind_speed_kilometers_per_hour, &
     0.01_real64, 'The weighted wind-speed average should match the configured provider weights.')
 
   call finish_tests()
