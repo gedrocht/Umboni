@@ -80,7 +80,7 @@ npm run validate
 - Architecture overview: [`docs/architecture-overview.md`](docs/architecture-overview.md)
 - Testing strategy: [`docs/testing-strategy.md`](docs/testing-strategy.md)
 - External library guide: [`docs/external-libraries.md`](docs/external-libraries.md)
-- Wiki deployment guide: [`wiki/README.md`](wiki/README.md)
+- Wiki deployment guide: see `wiki/README.md`
 
 ## Branch protection recommendations
 

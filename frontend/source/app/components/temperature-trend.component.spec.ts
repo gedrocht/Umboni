@@ -4,7 +4,7 @@ import { sampleRegionalForecastDocument } from '../testing/sample-forecast.fixtu
 import { TemperatureTrendComponent } from './temperature-trend.component';
 
 describe('TemperatureTrendComponent', () => {
-  it('renders an SVG polyline based on hourly temperatures', async () => {
+  it('renders an SVG polyline based on hourly temperatures', async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TemperatureTrendComponent]
     }).compileComponents();
@@ -16,8 +16,10 @@ describe('TemperatureTrendComponent', () => {
     );
     fixture.detectChanges();
 
-    const renderedPolyline = fixture.nativeElement.querySelector('polyline') as SVGPolylineElement;
-    expect(renderedPolyline.getAttribute('points')).toContain(',');
+    const renderedElement = fixture.nativeElement as HTMLElement;
+    const renderedPolyline = renderedElement.querySelector('polyline');
+
+    expect(renderedPolyline).not.toBeNull();
+    expect(renderedPolyline?.getAttribute('points') ?? '').toContain(',');
   });
 });
-

@@ -40,6 +40,7 @@ program test_forecast_consensus_engine
   provider_records(4)%air_temperature_celsius = 9.0_real64
   provider_records(4)%wind_speed_kilometers_per_hour = 18.0_real64
 
+  allocate(location_forecasts(0))
   call build_location_forecasts(provider_records, location_forecasts)
 
   call assert_equal_integer(1, size(location_forecasts), 'Exactly one location forecast should be created.')
@@ -53,4 +54,3 @@ program test_forecast_consensus_engine
 
   call finish_tests()
 end program test_forecast_consensus_engine
-

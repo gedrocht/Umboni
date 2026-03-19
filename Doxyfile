@@ -15,5 +15,5 @@ QUIET                  = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_AS_ERROR          = YES
 FILE_PATTERNS          = *.f90 *.md
-INPUT                  = README.md docs wiki fortran/source
+INPUT                  = README.md docs fortran/source
 USE_MDFILE_AS_MAINPAGE = README.md
