@@ -30,6 +30,8 @@ describe('TemperatureTrendComponent', () => {
     }).compileComponents();
 
     const fixture = TestBed.createComponent(TemperatureTrendComponent);
+    fixture.componentInstance.hourlyForecasts =
+      undefined as unknown as typeof fixture.componentInstance.hourlyForecasts;
     fixture.detectChanges();
 
     const renderedElement = fixture.nativeElement as HTMLElement;

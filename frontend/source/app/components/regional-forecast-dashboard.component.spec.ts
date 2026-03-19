@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { NEVER, of } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 
 import { ForecastDataService } from '../services/forecast-data.service';
@@ -60,5 +60,60 @@ describe('RegionalForecastDashboardComponent', () => {
     const renderedText = renderedElement.textContent ?? '';
 
     expect(renderedText).toContain('Loading forecast data...');
+  });
+
+  it('keeps the loading fallback visible before the forecast service emits', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [RegionalForecastDashboardComponent],
+      providers: [
+        {
+          provide: ForecastDataService,
+          useValue: {
+            loadRegionalForecast(): ReturnType<ForecastDataService['loadRegionalForecast']> {
+              return NEVER;
+            }
+          }
+        }
+      ]
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(RegionalForecastDashboardComponent);
+    fixture.detectChanges();
+
+    const renderedElement = fixture.nativeElement as HTMLElement;
+    const renderedText = renderedElement.textContent ?? '';
+
+    expect(renderedText).toContain('Loading forecast data...');
+  });
+
+  it('falls back to zero-valued summary signals when a location has no hourly forecast rows', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [RegionalForecastDashboardComponent],
+      providers: [
+        {
+          provide: ForecastDataService,
+          useValue: buildForecastDataServiceStub({
+            regionName: 'New England',
+            locationCount: 1,
+            locations: [
+              {
+                ...sampleRegionalForecastDocument.locations[0],
+                hourlyForecasts: []
+              }
+            ]
+          })
+        }
+      ]
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(RegionalForecastDashboardComponent);
+    fixture.detectChanges();
+
+    const renderedElement = fixture.nativeElement as HTMLElement;
+    const renderedText = renderedElement.textContent ?? '';
+
+    expect(renderedText).toContain('Average starting temperature');
+    expect(renderedText).toContain('0.0 C');
+    expect(renderedText).toContain('0% confidence');
   });
 });
