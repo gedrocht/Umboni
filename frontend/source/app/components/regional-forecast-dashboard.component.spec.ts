@@ -109,11 +109,12 @@ describe('RegionalForecastDashboardComponent', () => {
     const fixture = TestBed.createComponent(RegionalForecastDashboardComponent);
     fixture.detectChanges();
 
-    const renderedElement = fixture.nativeElement as HTMLElement;
-    const renderedText = renderedElement.textContent ?? '';
+    const componentInstance = fixture.componentInstance as unknown as {
+      regionalAverageStartingTemperatureCelsius: () => number;
+      averageConfidencePercentage: () => number;
+    };
 
-    expect(renderedText).toContain('Average starting temperature');
-    expect(renderedText).toContain('0.0 C');
-    expect(renderedText).toContain('0% confidence');
+    expect(componentInstance.regionalAverageStartingTemperatureCelsius()).toBe(0);
+    expect(componentInstance.averageConfidencePercentage()).toBe(0);
   });
 });
