@@ -19,9 +19,9 @@ import platform
 import shutil
 import subprocess
 import sys
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Mapping, Sequence
 
 
 @dataclass(frozen=True)
@@ -113,7 +113,10 @@ def build_external_command_requirements() -> tuple[ExternalCommandRequirement, .
             display_name="Ninja",
             executable_name="ninja",
             why_it_matters="Needed because the repository's CMake presets use the Ninja generator.",
-            installation_help_text="Install Ninja from https://ninja-build.org/ or through MSYS2, Homebrew, or your Linux package manager.",
+            installation_help_text=(
+                "Install Ninja from https://ninja-build.org/ or through MSYS2, "
+                "Homebrew, or your Linux package manager."
+            ),
         ),
         ExternalCommandRequirement(
             display_name="GNU Fortran",
@@ -131,7 +134,11 @@ def build_external_command_requirements() -> tuple[ExternalCommandRequirement, .
             display_name="Docker",
             executable_name="docker",
             why_it_matters="Optional, but useful if you want the observability stack or self-hosted wiki locally.",
-            installation_help_text="Install Docker Desktop from https://www.docker.com/products/docker-desktop/ if you want the optional containers.",
+            installation_help_text=(
+                "Install Docker Desktop from "
+                "https://www.docker.com/products/docker-desktop/ if you want "
+                "the optional containers."
+            ),
             is_optional=True,
         ),
     )
@@ -255,7 +262,10 @@ def build_bootstrap_steps(repository_root_directory: Path) -> list[ExecutionStep
             command_words=(
                 sys.executable,
                 "-c",
-                "from pathlib import Path; [Path(path).mkdir(parents=True, exist_ok=True) for path in ('artifacts/generated', 'artifacts/logs', 'build/doxygen')]",
+                "from pathlib import Path; "
+                "[Path(path).mkdir(parents=True, exist_ok=True) "
+                "for path in ('artifacts/generated', 'artifacts/logs', "
+                "'build/doxygen')]",
             ),
             working_directory=repository_root_directory,
         ),
