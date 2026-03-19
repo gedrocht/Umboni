@@ -1,0 +1,126 @@
+{
+  "regionName": "New England",
+  "locationCount": 2,
+  "locations": [
+    {
+      "stateName": "Massachusetts",
+      "locationName": "Boston",
+      "latitudeDegrees": 42.3601,
+      "longitudeDegrees": -71.0589,
+      "dailySummary": {
+        "minimumTemperatureCelsius": 7.2,
+        "maximumTemperatureCelsius": 12.8
+      },
+      "hourlyForecasts": [
+        {
+          "forecastHourOffset": 1,
+          "forecastTimestampUtc": "2026-03-18T13:00:00Z",
+          "ensembleAirTemperatureCelsius": 10.4,
+          "ensembleRelativeHumidityPercentage": 62,
+          "ensembleWindSpeedKilometersPerHour": 14.2,
+          "ensemblePrecipitationProbabilityPercentage": 18,
+          "ensembleSurfacePressureHectopascals": 1015.1,
+          "ensembleCloudCoverPercentage": 44,
+          "providerCoverageCount": 4,
+          "confidencePercentage": 100
+        },
+        {
+          "forecastHourOffset": 2,
+          "forecastTimestampUtc": "2026-03-18T14:00:00Z",
+          "ensembleAirTemperatureCelsius": 11.2,
+          "ensembleRelativeHumidityPercentage": 60,
+          "ensembleWindSpeedKilometersPerHour": 15.5,
+          "ensemblePrecipitationProbabilityPercentage": 22,
+          "ensembleSurfacePressureHectopascals": 1014.7,
+          "ensembleCloudCoverPercentage": 50,
+          "providerCoverageCount": 4,
+          "confidencePercentage": 100
+        },
+        {
+          "forecastHourOffset": 3,
+          "forecastTimestampUtc": "2026-03-18T15:00:00Z",
+          "ensembleAirTemperatureCelsius": 12.1,
+          "ensembleRelativeHumidityPercentage": 59,
+          "ensembleWindSpeedKilometersPerHour": 17.1,
+          "ensemblePrecipitationProbabilityPercentage": 28,
+          "ensembleSurfacePressureHectopascals": 1014.1,
+          "ensembleCloudCoverPercentage": 58,
+          "providerCoverageCount": 4,
+          "confidencePercentage": 100
+        },
+        {
+          "forecastHourOffset": 4,
+          "forecastTimestampUtc": "2026-03-18T16:00:00Z",
+          "ensembleAirTemperatureCelsius": 12.8,
+          "ensembleRelativeHumidityPercentage": 57,
+          "ensembleWindSpeedKilometersPerHour": 18.8,
+          "ensemblePrecipitationProbabilityPercentage": 34,
+          "ensembleSurfacePressureHectopascals": 1013.5,
+          "ensembleCloudCoverPercentage": 62,
+          "providerCoverageCount": 3,
+          "confidencePercentage": 75
+        }
+      ]
+    },
+    {
+      "stateName": "Maine",
+      "locationName": "Portland",
+      "latitudeDegrees": 43.6591,
+      "longitudeDegrees": -70.2568,
+      "dailySummary": {
+        "minimumTemperatureCelsius": 4.1,
+        "maximumTemperatureCelsius": 9.7
+      },
+      "hourlyForecasts": [
+        {
+          "forecastHourOffset": 1,
+          "forecastTimestampUtc": "2026-03-18T13:00:00Z",
+          "ensembleAirTemperatureCelsius": 6.4,
+          "ensembleRelativeHumidityPercentage": 68,
+          "ensembleWindSpeedKilometersPerHour": 20.1,
+          "ensemblePrecipitationProbabilityPercentage": 30,
+          "ensembleSurfacePressureHectopascals": 1014.9,
+          "ensembleCloudCoverPercentage": 64,
+          "providerCoverageCount": 4,
+          "confidencePercentage": 100
+        },
+        {
+          "forecastHourOffset": 2,
+          "forecastTimestampUtc": "2026-03-18T14:00:00Z",
+          "ensembleAirTemperatureCelsius": 7.3,
+          "ensembleRelativeHumidityPercentage": 67,
+          "ensembleWindSpeedKilometersPerHour": 21.5,
+          "ensemblePrecipitationProbabilityPercentage": 36,
+          "ensembleSurfacePressureHectopascals": 1014.3,
+          "ensembleCloudCoverPercentage": 70,
+          "providerCoverageCount": 4,
+          "confidencePercentage": 100
+        },
+        {
+          "forecastHourOffset": 3,
+          "forecastTimestampUtc": "2026-03-18T15:00:00Z",
+          "ensembleAirTemperatureCelsius": 8.5,
+          "ensembleRelativeHumidityPercentage": 65,
+          "ensembleWindSpeedKilometersPerHour": 23.0,
+          "ensemblePrecipitationProbabilityPercentage": 41,
+          "ensembleSurfacePressureHectopascals": 1013.8,
+          "ensembleCloudCoverPercentage": 73,
+          "providerCoverageCount": 3,
+          "confidencePercentage": 75
+        },
+        {
+          "forecastHourOffset": 4,
+          "forecastTimestampUtc": "2026-03-18T16:00:00Z",
+          "ensembleAirTemperatureCelsius": 9.7,
+          "ensembleRelativeHumidityPercentage": 63,
+          "ensembleWindSpeedKilometersPerHour": 24.2,
+          "ensemblePrecipitationProbabilityPercentage": 48,
+          "ensembleSurfacePressureHectopascals": 1013.2,
+          "ensembleCloudCoverPercentage": 78,
+          "providerCoverageCount": 3,
+          "confidencePercentage": 75
+        }
+      ]
+    }
+  ]
+}

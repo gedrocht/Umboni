@@ -18,6 +18,11 @@ jobs:
     name: scorecards
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
       - name: Run analysis
         uses: ossf/scorecard-action@v2.4.3
         with:

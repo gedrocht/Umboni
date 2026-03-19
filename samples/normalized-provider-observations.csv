@@ -1,0 +1,5 @@
+provider_name,state_name,location_name,latitude_degrees,longitude_degrees,altitude_meters,forecast_hour_offset,forecast_timestamp_utc,air_temperature_celsius,relative_humidity_percentage,wind_speed_kilometers_per_hour,precipitation_probability_percentage,surface_pressure_hectopascals,cloud_cover_percentage
+Open-Meteo,Massachusetts,Boston,42.3601,-71.0589,43.0,1,2026-03-18T13:00:00Z,10.0,62.0,15.0,20.0,1015.0,55.0
+National Weather Service,Massachusetts,Boston,42.3601,-71.0589,43.0,1,2026-03-18T13:00:00Z,12.0,58.0,12.0,25.0,-9999.0,-9999.0
+MET Norway,Massachusetts,Boston,42.3601,-71.0589,43.0,2,2026-03-18T14:00:00Z,11.0,60.0,9.0,15.0,1014.0,60.0
+7Timer,Massachusetts,Boston,42.3601,-71.0589,43.0,2,2026-03-18T14:00:00Z,9.0,65.0,18.0,30.0,-9999.0,70.0

@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "new-england-weather-data-fetcher"
+version = "0.1.0"
+description = "Multi-provider free weather API fetcher for the Umboni platform."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Umboni maintainers" }
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "coverage>=7.8.0",
+  "ruff>=0.11.0"
+]
+docs = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.6.0"
+]
+
+[project.scripts]
+new-england-weather-data-fetcher = "new_england_weather_data_fetcher.command_line_interface:main"
+
+[tool.setuptools]
+package-dir = { "" = "python" }
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.coverage.run]
+branch = true
+source = ["python/new_england_weather_data_fetcher"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.ruff]
+line-length = 132
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

@@ -1,17 +1,22 @@
-## Summary
+# Pull Request Summary
 
-Describe the change and the problem it solves.
+Describe the problem, the solution, and why this change is the right tradeoff.
 
 ## Validation
 
-- [ ] `npm run validate`
-- [ ] Added or updated tests
-- [ ] Security impact reviewed
-- [ ] Documentation updated if needed
+- [ ] Repository hygiene checks ran
+- [ ] Python fetcher tests ran
+- [ ] Fortran engine tests ran
+- [ ] Angular tests ran
+- [ ] Documentation or wiki content updated if relevant
 
-## Checklist
+## Risk Review
 
-- [ ] I reviewed my own changes
-- [ ] This PR is scoped and ready for review
-- [ ] No secrets, tokens, or credentials were added
+- [ ] External provider behavior was considered
+- [ ] Logging impact was considered
+- [ ] Security implications were reviewed
+- [ ] Breaking changes are called out clearly
 
+## Reviewer Notes
+
+Point reviewers at the files or design decisions that deserve special attention.

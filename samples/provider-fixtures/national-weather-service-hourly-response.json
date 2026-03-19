@@ -1,0 +1,33 @@
+{
+  "properties": {
+    "periods": [
+      {
+        "startTime": "2026-03-18T09:00:00-04:00",
+        "temperature": 50,
+        "temperatureUnit": "F",
+        "windSpeed": "10 mph",
+        "probabilityOfPrecipitation": {
+          "value": 25
+        },
+        "relativeHumidity": {
+          "value": 58
+        },
+        "shortForecast": "Mostly Cloudy"
+      },
+      {
+        "startTime": "2026-03-18T10:00:00-04:00",
+        "temperature": 48,
+        "temperatureUnit": "F",
+        "windSpeed": "12 mph",
+        "probabilityOfPrecipitation": {
+          "value": 35
+        },
+        "relativeHumidity": {
+          "value": 61
+        },
+        "shortForecast": "Chance Rain Showers"
+      }
+    ]
+  }
+}
+

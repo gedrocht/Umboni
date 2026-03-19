@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "timeseries": [
+      {
+        "time": "2026-03-18T13:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 9.5,
+              "relative_humidity": 64.0,
+              "wind_speed": 4.0,
+              "air_pressure_at_sea_level": 1013.2,
+              "cloud_area_fraction": 70.0
+            }
+          },
+          "next_1_hours": {
+            "details": {
+              "precipitation_amount": 0.0
+            }
+          }
+        }
+      },
+      {
+        "time": "2026-03-18T14:00:00Z",
+        "data": {
+          "instant": {
+            "details": {
+              "air_temperature": 8.8,
+              "relative_humidity": 68.0,
+              "wind_speed": 5.0,
+              "air_pressure_at_sea_level": 1012.8,
+              "cloud_area_fraction": 85.0
+            }
+          },
+          "next_1_hours": {
+            "details": {
+              "precipitation_amount": 0.6
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
