@@ -55,4 +55,3 @@ GitHub Actions enforce:
 - Secret scanning
 - CodeQL analysis
 - Scorecards analysis
-

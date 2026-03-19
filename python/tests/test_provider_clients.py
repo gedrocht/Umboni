@@ -24,7 +24,10 @@ from new_england_weather_data_fetcher.provider_clients import (
     parse_open_meteo_response,
     parse_seven_timer_response,
 )
-from new_england_weather_data_fetcher.weather_data_models import NormalizedWeatherRecord, RegionalLocation
+from new_england_weather_data_fetcher.weather_data_models import (
+    NormalizedWeatherRecord,
+    RegionalLocation,
+)
 
 
 class ProviderClientsTestCase(TestCase):
@@ -48,6 +51,7 @@ class ProviderClientsTestCase(TestCase):
         self.assertAlmostEqual(16.0934, convert_miles_per_hour_to_kilometers_per_hour(10.0), places=4)
         self.assertEqual("2026-03-18T13:00:00Z", normalize_timestamp_to_utc("2026-03-18T13:00"))
         self.assertEqual(80.0, infer_precipitation_probability_from_weather_code("Chance Rain Showers"))
+        self.assertEqual(10.0, infer_precipitation_probability_from_weather_code("Clear"))
         self.assertEqual(29.0, convert_seven_timer_wind_scale_to_kilometers_per_hour(5))
 
     def test_fetch_all_normalized_weather_records_rejects_non_positive_hour_counts(self) -> None:
@@ -74,6 +78,23 @@ class ProviderClientsTestCase(TestCase):
 
         self.assertEqual({"status": "ok"}, response_payload)
 
+    @patch("urllib.request.urlopen")
+    def test_load_json_from_endpoint_merges_custom_headers(self, mocked_urlopen: MagicMock) -> None:
+        mocked_response_stream = MagicMock()
+        mocked_response_stream.read.return_value = b'{"status":"ok"}'
+        mocked_urlopen.return_value.__enter__.return_value = mocked_response_stream
+
+        load_json_from_endpoint(
+            "https://example.com/weather.json",
+            request_headers={"Accept": "application/custom+json", "X-Test": "1"},
+        )
+
+        request_argument = mocked_urlopen.call_args.args[0]
+        request_headers = {key.lower(): value for key, value in request_argument.header_items()}
+
+        self.assertEqual("application/custom+json", request_headers["accept"])
+        self.assertEqual("1", request_headers["x-test"])
+
     def test_parse_national_weather_service_response_converts_units(self) -> None:
         response_payload = self.load_fixture_json("national-weather-service-hourly-response.json")
 
@@ -88,6 +109,20 @@ class ProviderClientsTestCase(TestCase):
         self.assertAlmostEqual(10.0, normalized_records[0].air_temperature_celsius, places=1)
         self.assertAlmostEqual(16.0934, normalized_records[0].wind_speed_kilometers_per_hour, places=4)
         self.assertEqual("2026-03-18T13:00:00Z", normalized_records[0].forecast_timestamp_utc)
+
+    def test_parse_national_weather_service_response_leaves_celsius_values_unchanged(self) -> None:
+        response_payload = self.load_fixture_json("national-weather-service-hourly-response.json")
+        response_payload["properties"]["periods"][0]["temperature"] = 11
+        response_payload["properties"]["periods"][0]["temperatureUnit"] = "C"
+
+        normalized_records = parse_national_weather_service_hourly_response(
+            self.sample_location,
+            response_payload,
+            maximum_hours=1,
+        )
+
+        self.assertEqual(1, len(normalized_records))
+        self.assertAlmostEqual(11.0, normalized_records[0].air_temperature_celsius, places=1)
 
     def test_parse_met_norway_response_infers_precipitation_probability(self) -> None:
         response_payload = self.load_fixture_json("met-norway-response.json")
@@ -262,3 +297,29 @@ class ProviderClientsTestCase(TestCase):
         self.assertEqual(1, len(normalized_records))
         self.assertEqual("MET Norway", normalized_records[0].provider_name)
         self.assertGreaterEqual(mocked_append_structured_log.call_count, 2)
+
+    @patch("new_england_weather_data_fetcher.provider_clients.append_structured_log")
+    @patch("new_england_weather_data_fetcher.provider_clients.fetch_seven_timer_records_for_location")
+    @patch("new_england_weather_data_fetcher.provider_clients.fetch_met_norway_records_for_location")
+    @patch("new_england_weather_data_fetcher.provider_clients.fetch_national_weather_service_records_for_location")
+    @patch("new_england_weather_data_fetcher.provider_clients.fetch_open_meteo_records_for_location")
+    @patch("new_england_weather_data_fetcher.provider_clients.load_default_new_england_locations")
+    def test_fetch_all_normalized_weather_records_raises_when_every_provider_returns_no_records(
+        self,
+        mocked_load_default_new_england_locations,
+        mocked_fetch_open_meteo_records_for_location,
+        mocked_fetch_national_weather_service_records_for_location,
+        mocked_fetch_met_norway_records_for_location,
+        mocked_fetch_seven_timer_records_for_location,
+        mocked_append_structured_log,
+    ) -> None:
+        mocked_load_default_new_england_locations.return_value = [self.sample_location]
+        mocked_fetch_open_meteo_records_for_location.return_value = []
+        mocked_fetch_national_weather_service_records_for_location.return_value = []
+        mocked_fetch_met_norway_records_for_location.return_value = []
+        mocked_fetch_seven_timer_records_for_location.return_value = []
+
+        with self.assertRaises(RuntimeError):
+            fetch_all_normalized_weather_records(24, "artifacts/logs/test.log.jsonl")
+
+        self.assertGreaterEqual(mocked_append_structured_log.call_count, 1)

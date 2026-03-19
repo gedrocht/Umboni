@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+from contextlib import redirect_stderr
 from io import StringIO
 from unittest import TestCase
 from unittest.mock import patch
-from contextlib import redirect_stderr
 
 from new_england_weather_data_fetcher.command_line_interface import build_argument_parser, main
 from new_england_weather_data_fetcher.weather_data_models import NormalizedWeatherRecord

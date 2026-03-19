@@ -8,8 +8,12 @@ from pathlib import Path
 
 def main() -> int:
     repository_root = Path(__file__).resolve().parents[1]
-    generated_forecast_path = repository_root / "artifacts" / "generated" / "new-england-forecast.json"
-    frontend_forecast_path = repository_root / "frontend" / "public" / "data" / "new-england-forecast-sample.json"
+    generated_forecast_path = (
+        repository_root / "artifacts" / "generated" / "new-england-forecast.json"
+    )
+    frontend_forecast_path = (
+        repository_root / "frontend" / "public" / "data" / "new-england-forecast-sample.json"
+    )
 
     if not generated_forecast_path.exists():
         raise FileNotFoundError(

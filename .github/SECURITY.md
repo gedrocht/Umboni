@@ -23,4 +23,3 @@ When reporting a security issue, include:
 - Dependabot update automation
 - Scorecards analysis
 - strict code review ownership via CODEOWNERS
-

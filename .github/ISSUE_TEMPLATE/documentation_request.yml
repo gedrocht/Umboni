@@ -14,7 +14,7 @@ body:
     id: audience
     attributes:
       label: Who is the audience?
-      description: Example: complete beginner, contributor, maintainer, reviewer.
+      description: "Example: complete beginner, contributor, maintainer, reviewer."
     validations:
       required: true
   - type: textarea

@@ -60,7 +60,9 @@ def main() -> int:
             log_file_path=parsed_arguments.log_file,
         )
         write_normalized_records_to_csv(parsed_arguments.output_csv, normalized_weather_records)
-    except Exception as raised_exception:  # pragma: no cover - kept intentionally broad for CLI robustness.
+    except (
+        Exception
+    ) as raised_exception:  # pragma: no cover - kept intentionally broad for CLI robustness.
         append_structured_log(
             parsed_arguments.log_file,
             "ERROR",
@@ -80,5 +82,5 @@ def main() -> int:
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(main())

@@ -106,13 +106,21 @@ def parse_open_meteo_response(
                 altitude_meters=regional_location.altitude_meters,
                 forecast_hour_offset=current_hour_index,
                 forecast_timestamp_utc=normalize_timestamp_to_utc(str(timestamp_value)),
-                air_temperature_celsius=float(hourly_payload["temperature_2m"][current_hour_index - 1]),
-                relative_humidity_percentage=float(hourly_payload["relative_humidity_2m"][current_hour_index - 1]),
-                wind_speed_kilometers_per_hour=float(hourly_payload["wind_speed_10m"][current_hour_index - 1]),
+                air_temperature_celsius=float(
+                    hourly_payload["temperature_2m"][current_hour_index - 1]
+                ),
+                relative_humidity_percentage=float(
+                    hourly_payload["relative_humidity_2m"][current_hour_index - 1]
+                ),
+                wind_speed_kilometers_per_hour=float(
+                    hourly_payload["wind_speed_10m"][current_hour_index - 1]
+                ),
                 precipitation_probability_percentage=float(
                     hourly_payload["precipitation_probability"][current_hour_index - 1]
                 ),
-                surface_pressure_hectopascals=float(hourly_payload["surface_pressure"][current_hour_index - 1]),
+                surface_pressure_hectopascals=float(
+                    hourly_payload["surface_pressure"][current_hour_index - 1]
+                ),
                 cloud_cover_percentage=float(hourly_payload["cloud_cover"][current_hour_index - 1]),
             )
         )
@@ -136,7 +144,9 @@ def parse_national_weather_service_hourly_response(
             temperature_value = convert_fahrenheit_to_celsius(temperature_value)
 
         raw_wind_speed_text = str(hourly_period["windSpeed"]).split(" ")[0]
-        wind_speed_kilometers_per_hour = convert_miles_per_hour_to_kilometers_per_hour(float(raw_wind_speed_text))
+        wind_speed_kilometers_per_hour = convert_miles_per_hour_to_kilometers_per_hour(
+            float(raw_wind_speed_text)
+        )
 
         normalized_records.append(
             NormalizedWeatherRecord(
@@ -221,7 +231,9 @@ def parse_seven_timer_response(
     data_series_entries = response_payload["dataseries"][:maximum_hours]
 
     for current_hour_index, data_series_entry in enumerate(data_series_entries, start=1):
-        forecast_timestamp = initialization_time + timedelta(hours=int(data_series_entry["timepoint"]))
+        forecast_timestamp = initialization_time + timedelta(
+            hours=int(data_series_entry["timepoint"])
+        )
         wind_payload = data_series_entry.get("wind10m", {})
 
         normalized_records.append(
@@ -234,8 +246,12 @@ def parse_seven_timer_response(
                 altitude_meters=regional_location.altitude_meters,
                 forecast_hour_offset=current_hour_index,
                 forecast_timestamp_utc=forecast_timestamp.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                air_temperature_celsius=float(data_series_entry.get("temp2m", MISSING_NUMERIC_VALUE)),
-                relative_humidity_percentage=float(data_series_entry.get("rh2m", MISSING_NUMERIC_VALUE)),
+                air_temperature_celsius=float(
+                    data_series_entry.get("temp2m", MISSING_NUMERIC_VALUE)
+                ),
+                relative_humidity_percentage=float(
+                    data_series_entry.get("rh2m", MISSING_NUMERIC_VALUE)
+                ),
                 wind_speed_kilometers_per_hour=convert_seven_timer_wind_scale_to_kilometers_per_hour(
                     int(wind_payload.get("speed", 0))
                 ),
@@ -243,7 +259,8 @@ def parse_seven_timer_response(
                     str(data_series_entry.get("weather", ""))
                 ),
                 surface_pressure_hectopascals=MISSING_NUMERIC_VALUE,
-                cloud_cover_percentage=(float(data_series_entry.get("cloudcover", 0)) / 8.0) * 100.0,
+                cloud_cover_percentage=(float(data_series_entry.get("cloudcover", 0)) / 8.0)
+                * 100.0,
             )
         )
 
@@ -335,13 +352,13 @@ def fetch_national_weather_service_records_for_location(
 ) -> list[NormalizedWeatherRecord]:
     """Calls the United States National Weather Service and normalizes the result."""
 
-    points_endpoint_url = (
-        f"https://api.weather.gov/points/{regional_location.latitude_degrees},{regional_location.longitude_degrees}"
-    )
+    points_endpoint_url = f"https://api.weather.gov/points/{regional_location.latitude_degrees},{regional_location.longitude_degrees}"
     points_payload = load_json_from_endpoint(points_endpoint_url)
     forecast_endpoint_url = str(points_payload["properties"]["forecastHourly"])
     forecast_payload = load_json_from_endpoint(forecast_endpoint_url)
-    return parse_national_weather_service_hourly_response(regional_location, forecast_payload, maximum_hours)
+    return parse_national_weather_service_hourly_response(
+        regional_location, forecast_payload, maximum_hours
+    )
 
 
 def fetch_met_norway_records_for_location(

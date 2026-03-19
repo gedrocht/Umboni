@@ -28,4 +28,3 @@ def append_structured_log(
     with log_path.open("a", encoding="utf-8") as output_stream:
         output_stream.write(json.dumps(serialized_entry, sort_keys=True))
         output_stream.write("\n")
-

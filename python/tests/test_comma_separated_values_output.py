@@ -6,7 +6,9 @@ import tempfile
 from pathlib import Path
 from unittest import TestCase
 
-from new_england_weather_data_fetcher.comma_separated_values_output import write_normalized_records_to_csv
+from new_england_weather_data_fetcher.comma_separated_values_output import (
+    write_normalized_records_to_csv,
+)
 from new_england_weather_data_fetcher.weather_data_models import NormalizedWeatherRecord
 
 

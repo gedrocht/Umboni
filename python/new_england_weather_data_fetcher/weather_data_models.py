@@ -54,4 +54,3 @@ class NormalizedWeatherRecord:
             "surface_pressure_hectopascals": f"{self.surface_pressure_hectopascals:.2f}",
             "cloud_cover_percentage": f"{self.cloud_cover_percentage:.2f}",
         }
-
