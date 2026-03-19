@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -35,7 +35,7 @@ jobs:
           python -m coverage report --fail-under=100
 
       - name: Upload Python coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: python-coverage
           path: coverage/python-coverage.xml
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Fortran build dependencies
         run: sudo apt-get update && sudo apt-get install --yes gfortran ninja-build gcovr
@@ -65,7 +65,7 @@ jobs:
           gcovr --root . --filter fortran/source --xml-pretty --output coverage/fortran-coverage.xml --fail-under-line 70
 
       - name: Upload Fortran coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: fortran-coverage
           path: coverage/fortran-coverage.xml
