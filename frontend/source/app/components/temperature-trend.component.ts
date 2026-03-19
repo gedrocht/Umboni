@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import type { HourlyForecast } from '../models/regional-forecast';
 
@@ -10,7 +10,6 @@ import type { HourlyForecast } from '../models/regional-forecast';
   selector: 'umboni-temperature-trend',
   standalone: true,
   imports: [CommonModule],
-  inputs: ['hourlyForecasts'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <figure class="trend-figure">
@@ -63,7 +62,16 @@ import type { HourlyForecast } from '../models/regional-forecast';
   ]
 })
 export class TemperatureTrendComponent {
-  hourlyForecasts: readonly HourlyForecast[] = [];
+  private currentHourlyForecasts: readonly HourlyForecast[] = [];
+
+  @Input()
+  set hourlyForecasts(hourlyForecasts: readonly HourlyForecast[] | null | undefined) {
+    this.currentHourlyForecasts = hourlyForecasts ?? [];
+  }
+
+  get hourlyForecasts(): readonly HourlyForecast[] {
+    return this.currentHourlyForecasts;
+  }
 
   /**
    * Computes SVG points by scaling forecast temperatures into a compact sparkline.
