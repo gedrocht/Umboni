@@ -48,4 +48,3 @@ The Angular application reads the generated JSON and turns it into:
 - Per-location cards
 - A temperature sparkline
 - A beginner-friendly hourly table
-

@@ -7,4 +7,3 @@ The system has a simple story:
 - Angular shows the result visually.
 
 If you understand those three bullets, you already understand the project at a high level.
-

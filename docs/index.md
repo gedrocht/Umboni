@@ -21,4 +21,3 @@ The platform has three major runtime layers:
 - Read [Getting Started](getting-started.md) if you want a gentle first run.
 - Read [Architecture](architecture-overview.md) if you want the system-level overview first.
 - Read [Beginner Walkthrough](tutorials/beginner-walkthrough.md) if you want a guided narrative explanation.
-
