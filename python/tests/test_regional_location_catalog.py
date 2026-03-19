@@ -4,7 +4,9 @@ from __future__ import annotations
 
 from unittest import TestCase
 
-from new_england_weather_data_fetcher.regional_location_catalog import load_default_new_england_locations
+from new_england_weather_data_fetcher.regional_location_catalog import (
+    load_default_new_england_locations,
+)
 
 
 class RegionalLocationCatalogTestCase(TestCase):

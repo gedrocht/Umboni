@@ -24,7 +24,10 @@ from new_england_weather_data_fetcher.provider_clients import (
     parse_open_meteo_response,
     parse_seven_timer_response,
 )
-from new_england_weather_data_fetcher.weather_data_models import NormalizedWeatherRecord, RegionalLocation
+from new_england_weather_data_fetcher.weather_data_models import (
+    NormalizedWeatherRecord,
+    RegionalLocation,
+)
 
 
 class ProviderClientsTestCase(TestCase):

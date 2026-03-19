@@ -60,7 +60,10 @@ contains
 
     allocate(location_forecasts(bundle_count))
     do current_record_index = 1, bundle_count
-      call convert_aggregation_to_public_forecast(aggregation_bundles(current_record_index), location_forecasts(current_record_index))
+      call convert_aggregation_to_public_forecast( &
+        aggregation_bundles(current_record_index), &
+        location_forecasts(current_record_index) &
+      )
     end do
   end subroutine build_location_forecasts
 

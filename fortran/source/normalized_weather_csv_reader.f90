@@ -2,7 +2,11 @@
 module normalized_weather_csv_reader
   use, intrinsic :: iso_fortran_env, only: real64
   use string_utilities, only: parse_integer_value, parse_real_value, split_comma_separated_line
-  use weather_data_types, only: missing_numeric_value, provider_hourly_forecast_record, text_field_length
+  use weather_data_types, only: &
+    missing_numeric_value, &
+    provider_hourly_forecast_record, &
+    text_field_length, &
+    timestamp_length
   implicit none
   private
 
@@ -96,7 +100,10 @@ contains
     parsed_record%longitude_degrees = parse_real_value(split_fields(5), 0.0_real64)
     parsed_record%altitude_meters = parse_real_value(split_fields(6), 0.0_real64)
     parsed_record%forecast_hour_offset = parse_integer_value(split_fields(7), 0)
-    parsed_record%forecast_timestamp_utc = split_fields(8)
+    parsed_record%forecast_timestamp_utc = ''
+    if (len_trim(split_fields(8)) > 0) then
+      parsed_record%forecast_timestamp_utc = split_fields(8)(1:min(len_trim(split_fields(8)), timestamp_length))
+    end if
     parsed_record%air_temperature_celsius = parse_real_value(split_fields(9), missing_numeric_value)
     parsed_record%relative_humidity_percentage = parse_real_value(split_fields(10), missing_numeric_value)
     parsed_record%wind_speed_kilometers_per_hour = parse_real_value(split_fields(11), missing_numeric_value)
@@ -106,4 +113,3 @@ contains
   end function parse_record_from_line
 
 end module normalized_weather_csv_reader
-

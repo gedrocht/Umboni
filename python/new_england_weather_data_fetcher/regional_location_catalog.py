@@ -52,4 +52,3 @@ def load_default_new_england_locations() -> list[RegionalLocation]:
             altitude_meters=18.0,
         ),
     ]
-
