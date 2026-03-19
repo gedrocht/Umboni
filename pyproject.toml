@@ -32,6 +32,7 @@ docs = [
 
 [project.scripts]
 new-england-weather-data-fetcher = "new_england_weather_data_fetcher.command_line_interface:main"
+umboni-workflow = "new_england_weather_data_fetcher.beginner_workflow:main"
 
 [tool.setuptools]
 package-dir = { "" = "python" }
