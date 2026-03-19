@@ -1,23 +1,48 @@
 # Umboni Weather Intelligence Platform
 
-Umboni is a teaching-oriented weather platform for New England. The repository is intentionally verbose in its code comments, tutorials, and architecture notes so a beginner can learn how a multi-language system fits together.
+Umboni is a teaching-oriented weather platform for New England.
 
-## The big picture
+The repository combines:
 
-The platform has three major runtime layers:
+1. a Python fetcher for free weather APIs
+2. a Fortran simulator for the 24-hour ensemble forecast
+3. an Angular dashboard for the final visualization
 
-1. A Python fetcher gathers forecast data from multiple free providers.
-2. A Fortran engine combines those sources into a 24-hour ensemble forecast.
-3. An Angular application visualizes the result for people who prefer charts, cards, and tables.
+## The shortest path for a beginner
 
-## Why this project is useful for beginners
+If you do not know where to start, run these commands in order:
 
-- It shows how a legacy-friendly systems language such as Fortran can still be productive in a modern stack.
-- It demonstrates how to normalize several external APIs into one internal contract.
-- It provides a real example of documentation, testing, observability, and GitHub automation living together in one repository.
+```bash
+python scripts/umboni.py doctor
+python scripts/umboni.py bootstrap
+python scripts/umboni.py pipeline
+python scripts/umboni.py run-frontend
+```
 
-## Start here
+That is the recommended first-run path.
 
-- Read [Getting Started](getting-started.md) if you want a gentle first run.
-- Read [Architecture](architecture-overview.md) if you want the system-level overview first.
-- Read [Beginner Walkthrough](tutorials/beginner-walkthrough.md) if you want a guided narrative explanation.
+## Read these pages in this order
+
+1. [Prerequisites](prerequisites.md)
+2. [Getting Started](getting-started.md)
+3. [Build, Run, and Test](build-run-test.md)
+4. [Troubleshooting](troubleshooting.md)
+
+After that, move into the deeper reference material:
+
+- [Architecture](architecture-overview.md)
+- [Data Flow](data-flow.md)
+- [Testing Strategy](testing-strategy.md)
+- [Logging and Observability](logging-and-observability.md)
+- [External Libraries](external-libraries.md)
+- [Beginner Walkthrough](tutorials/beginner-walkthrough.md)
+
+## What success looks like
+
+You know the repository is working when all of these are true:
+
+- `python scripts/umboni.py doctor` reports all required tools as present
+- `python scripts/umboni.py pipeline` creates the forecast artifacts
+- `python scripts/umboni.py run-frontend` serves the dashboard locally
+- `python scripts/umboni.py test all --skip-end-to-end-tests` completes without
+  errors

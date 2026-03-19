@@ -2,6 +2,21 @@
 
 Umboni treats testing as a first-class feature rather than a final cleanup step.
 
+## One beginner-friendly command
+
+If you want the full repository test flow without remembering every individual
+tool command, run:
+
+```bash
+python scripts/umboni.py test all
+```
+
+If you want the same flow without the browser-based end-to-end tests, run:
+
+```bash
+python scripts/umboni.py test all --skip-end-to-end-tests
+```
+
 ## Repository hygiene tests
 
 Repository-level tests and checks catch non-code regressions:
