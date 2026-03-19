@@ -1,0 +1,28 @@
+{
+  "product": "civil",
+  "init": "2026031812",
+  "dataseries": [
+    {
+      "timepoint": 3,
+      "cloudcover": 5,
+      "rh2m": 65,
+      "wind10m": {
+        "direction": "NE",
+        "speed": 3
+      },
+      "temp2m": 7,
+      "weather": "pcloudy"
+    },
+    {
+      "timepoint": 6,
+      "cloudcover": 8,
+      "rh2m": 72,
+      "wind10m": {
+        "direction": "E",
+        "speed": 5
+      },
+      "temp2m": 6,
+      "weather": "lightrain"
+    }
+  ]
+}

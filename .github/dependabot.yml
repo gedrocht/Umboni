@@ -1,5 +1,13 @@
 version: 2
 updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - python
   - package-ecosystem: npm
     directory: /
     schedule:
@@ -8,6 +16,16 @@ updates:
     labels:
       - dependencies
       - security
+    commit-message:
+      prefix: chore
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - frontend
     commit-message:
       prefix: chore
   - package-ecosystem: github-actions

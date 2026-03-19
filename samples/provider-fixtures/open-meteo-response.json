@@ -1,0 +1,33 @@
+{
+  "hourly": {
+    "time": [
+      "2026-03-18T13:00",
+      "2026-03-18T14:00"
+    ],
+    "temperature_2m": [
+      10.0,
+      11.5
+    ],
+    "relative_humidity_2m": [
+      62.0,
+      60.0
+    ],
+    "wind_speed_10m": [
+      15.0,
+      18.0
+    ],
+    "precipitation_probability": [
+      20.0,
+      35.0
+    ],
+    "surface_pressure": [
+      1015.0,
+      1014.0
+    ],
+    "cloud_cover": [
+      55.0,
+      60.0
+    ]
+  }
+}
+

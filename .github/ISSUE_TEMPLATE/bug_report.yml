@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a defect or regression.
+description: Report a defect or regression in the fetcher, Fortran engine, docs, or Angular dashboard.
 title: "[Bug]: "
 labels:
   - bug
@@ -29,4 +29,15 @@ body:
       label: Actual behavior
     validations:
       required: true
-
+  - type: dropdown
+    id: affected-layer
+    attributes:
+      label: Affected layer
+      options:
+        - Python fetcher
+        - Fortran engine
+        - Angular dashboard
+        - Documentation
+        - GitHub automation
+    validations:
+      required: true

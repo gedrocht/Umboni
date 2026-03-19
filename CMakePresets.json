@@ -1,0 +1,61 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 27,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "displayName": "Default Development Configuration",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "ENABLE_STRICT_FORTRAN_WARNINGS": "ON",
+        "ENABLE_FORTRAN_ADDRESS_SANITIZER": "OFF",
+        "ENABLE_FORTRAN_COVERAGE": "OFF"
+      }
+    },
+    {
+      "name": "coverage",
+      "displayName": "Coverage Configuration",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build-coverage",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "ENABLE_STRICT_FORTRAN_WARNINGS": "ON",
+        "ENABLE_FORTRAN_ADDRESS_SANITIZER": "OFF",
+        "ENABLE_FORTRAN_COVERAGE": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    },
+    {
+      "name": "coverage",
+      "configurePreset": "coverage"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "coverage",
+      "configurePreset": "coverage",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
+
