@@ -10,10 +10,8 @@ describe('TemperatureTrendComponent', () => {
     }).compileComponents();
 
     const fixture = TestBed.createComponent(TemperatureTrendComponent);
-    fixture.componentRef.setInput(
-      'hourlyForecasts',
-      sampleRegionalForecastDocument.locations[0].hourlyForecasts
-    );
+    fixture.componentInstance.hourlyForecasts =
+      sampleRegionalForecastDocument.locations[0].hourlyForecasts;
     fixture.detectChanges();
 
     const renderedElement = fixture.nativeElement as HTMLElement;
@@ -39,6 +37,6 @@ describe('TemperatureTrendComponent', () => {
     const renderedCaption = renderedElement.querySelector('figcaption');
 
     expect(renderedPolyline?.getAttribute('points')).toBe('0,50 240,50');
-    expect(renderedCaption?.textContent ?? '').toContain('0.0');
+    expect(renderedCaption?.textContent ?? '').toContain('0 to 0');
   });
 });
