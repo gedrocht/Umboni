@@ -1,6 +1,38 @@
 # Umboni New England Weather Intelligence Platform
 
+[![Repository Hygiene](https://github.com/gedrocht/Umboni/actions/workflows/repository-hygiene.yml/badge.svg?branch=main)](https://github.com/gedrocht/Umboni/actions/workflows/repository-hygiene.yml)
+[![Backend Quality](https://github.com/gedrocht/Umboni/actions/workflows/backend-quality.yml/badge.svg?branch=main)](https://github.com/gedrocht/Umboni/actions/workflows/backend-quality.yml)
+[![Frontend Quality](https://github.com/gedrocht/Umboni/actions/workflows/frontend-quality.yml/badge.svg?branch=main)](https://github.com/gedrocht/Umboni/actions/workflows/frontend-quality.yml)
+[![Documentation Build](https://github.com/gedrocht/Umboni/actions/workflows/documentation.yml/badge.svg?branch=main)](https://github.com/gedrocht/Umboni/actions/workflows/documentation.yml)
+[![CodeQL](https://github.com/gedrocht/Umboni/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/gedrocht/Umboni/actions/workflows/codeql.yml)
+
 Umboni is a deliberately over-documented, beginner-friendly weather intelligence monorepo. It combines a Fortran simulation engine, a Python free-weather-data fetcher, and an Angular visualization application to collect multi-source forecast data for New England and generate a 24-hour regional ensemble forecast.
+
+- Live documentation: [gedrocht.github.io/Umboni](https://gedrocht.github.io/Umboni/)
+- Beginner walkthrough: [docs/getting-started.md](docs/getting-started.md)
+- Beginner command runner: [`python scripts/umboni.py --help`](scripts/umboni.py)
+
+## Start here first
+
+If you are new to the repository, use the beginner workflow instead of memorizing individual build commands:
+
+```bash
+python scripts/umboni.py doctor
+python scripts/umboni.py bootstrap
+python scripts/umboni.py pipeline
+python scripts/umboni.py run-frontend
+python scripts/umboni.py test all --skip-end-to-end-tests
+```
+
+That sequence checks prerequisites, installs dependencies, generates forecast data, launches the Angular dashboard, and runs the repo-wide validation path.
+
+## What success looks like
+
+- `doctor` confirms the required local tools are installed.
+- `bootstrap` installs the Python and Node dependencies used by the repository.
+- `pipeline` writes normalized provider data and a generated forecast into `artifacts/generated`.
+- `run-frontend` starts the Angular dashboard so you can inspect the forecast visually.
+- `test all` exercises the repository, Python, Fortran, frontend, and documentation quality gates.
 
 ## What this repository contains
 
@@ -43,21 +75,32 @@ The fetch layer is extensible, so additional cities, stations, or providers can 
 
 ## Quick start
 
-### Repository hygiene tooling
+### One-command beginner flow
 
 ```bash
-npm install
+python scripts/umboni.py doctor
+python scripts/umboni.py bootstrap
+python scripts/umboni.py pipeline
+python scripts/umboni.py run-frontend
+```
+
+### If you prefer the lower-level commands
+
+#### Repository hygiene tooling
+
+```bash
+npm ci
 npm run prepare
 npm run validate:repository
 ```
 
-### Python fetcher
+#### Python fetcher
 
 ```bash
 python scripts/run_weather_fetcher.py --output-csv artifacts/generated/provider-observations.csv
 ```
 
-### Fortran simulator
+#### Fortran simulator
 
 ```bash
 cmake --preset default
@@ -66,21 +109,24 @@ ctest --preset default --output-on-failure
 python scripts/synchronize_generated_forecast_to_frontend.py
 ```
 
-### Angular dashboard
+#### Angular dashboard
 
 ```bash
 cd frontend
-npm install
+npm ci
 npm run validate
 ```
 
 ## Documentation experience
 
 - Beginner tutorials: [`docs/getting-started.md`](docs/getting-started.md)
+- Build, run, and test guide: [`docs/build-run-test.md`](docs/build-run-test.md)
+- Prerequisites guide: [`docs/prerequisites.md`](docs/prerequisites.md)
 - Architecture overview: [`docs/architecture-overview.md`](docs/architecture-overview.md)
 - Testing strategy: [`docs/testing-strategy.md`](docs/testing-strategy.md)
+- Troubleshooting guide: [`docs/troubleshooting.md`](docs/troubleshooting.md)
 - External library guide: [`docs/external-libraries.md`](docs/external-libraries.md)
-- Wiki deployment guide: see `wiki/README.md`
+- Wiki deployment guide: [`wiki/README.md`](wiki/README.md)
 
 ## Branch protection recommendations
 
