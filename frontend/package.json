@@ -13,7 +13,7 @@
     "validate": "npm run lint && npm run test && npm run test:coverage && npm run build"
   },
   "dependencies": {
-    "@angular/common": "21.2.5",
+    "@angular/common": "21.2.6",
     "@angular/compiler": "21.2.5",
     "@angular/core": "21.2.5",
     "@angular/forms": "21.2.5",
